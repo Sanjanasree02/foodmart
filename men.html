@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men's Collection</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    .banner-blocks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      margin-bottom: 15px;
+    }
+    .banner-blocks .banner-ad {
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .banner-blocks .large {
+      grid-column: span 2;
+    }
+    .banner-blocks .banner-content .categories {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+    .banner-blocks .banner-content .banner-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+    .product-card {
+      margin-bottom: 30px;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card .card-title {
+      font-weight: 600;
+    }
+    .product-price {
+      font-weight: 700;
+      color: #212529;
+    }
+    .product-price del {
+      color: #6c757d;
+      font-weight: 400;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG Icons (hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="user" viewBox="0 0 24 24">
+      <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 24 24">
+      <path d="M20.16 5A6.29 6.29 0 0 0 12 4.36a6.27 6.27 0 0 0-8.16 9.48l6.21 6.22a2.78 2.78 0 0 0 3.9 0l6.21-6.22a6.27 6.27 0 0 0 0-8.84zm-1.41 7.46l-6.21 6.21a.76.76 0 0 1-1.08 0l-6.21-6.24a4.29 4.29 0 0 1 0-6 4.27 4.27 0 0 1 6 0 1 1 0 0 0 1.42 0 4.27 4.27 0 0 1 6 0 4.29 4.29 0 0 1 .08 6z"/>
+    </symbol>
+    <symbol id="cart" viewBox="0 0 24 24">
+      <path d="M8 18a1 1 0 1 0 1 1 1 1 0 0 0-1-1zM18 18a1 1 0 1 0 1 1 1 1 0 0 0-1-1zM21 6H7.83l-.58-3.4A1 1 0 0 0 6.5 2h-4a1 1 0 0 0 0 2h3.22l.58 3.4A1.006 1.006 0 0 0 7 8h12.78l-1.92 7H8.17l-.58-3.41A1 1 0 0 0 6.84 11H3a1 1 0 0 0 0 2h3.06l.57 3.41a1 1 0 0 0 .99.76h10.8a1 1 0 0 0 .96-.67l2.4-9A1 1 0 0 0 21 6z"/>
+    </symbol>
+    <symbol id="search" viewBox="0 0 24 24">
+      <path d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 24 24">
+      <path d="M17.92 11.62a1 1 0 0 0-.21-.33l-5-5a1 1 0 0 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76z"/>
+    </symbol>
+  </svg>
+
+  <!-- Offcanvas Cart -->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Growers cider</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Fresh grapes</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Heinz tomato ketchup</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li>
+        </ul>
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Offcanvas Search -->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Search</span>
+        </h4>
+        <form role="search" action="index.html" method="get" class="d-flex mt-3 gap-0">
+          <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="What are you looking for?" aria-label="What are you looking for?">
+          <button class="btn btn-dark rounded-end rounded-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container-fluid">
+      <div class="row py-3 border-bottom">
+        
+        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+          <div class="main-logo">
+            <a href="index.html">
+              <img src="images/logo.png" alt="logo" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
+          <div class="search-bar row bg-light p-2 my-2 rounded-4">
+            <div class="col-md-4 d-none d-md-block">
+              <select class="form-select border-0 bg-transparent">
+                <option>All Categories</option>
+                <option>Groceries</option>
+                <option>Drinks</option>
+                <option>Chocolates</option>
+              </select>
+            </div>
+            <div class="col-11 col-md-7">
+              <form id="search-form" class="text-center" action="index.html" method="post">
+                <input type="text" class="form-control border-0 bg-transparent" placeholder="Search for more than 20,000 products" />
+              </form>
+            </div>
+            <div class="col-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/></svg>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+          <div class="support-box text-end d-none d-xl-block">
+            <span class="fs-6 text-muted">For Support?</span>
+            <h5 class="mb-0">+980-34984089</h5>
+          </div>
+
+          <ul class="d-flex justify-content-end list-unstyled m-0">
+            <li>
+              <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#user"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#heart"></use></svg>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#cart"></use></svg>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#search"></use></svg>
+              </a>
+            </li>
+          </ul>
+
+          <div class="cart text-end d-none d-lg-block dropdown">
+            <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+              <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
+              <span class="cart-total fs-5 fw-bold">$1290.00</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row py-3">
+        <div class="d-flex justify-content-center justify-content-sm-between align-items-center">
+          <nav class="main-menu d-flex navbar navbar-expand-lg">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+              <div class="offcanvas-header justify-content-center">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+
+              <div class="offcanvas-body">
+            
+                <select class="filter-categories border-0 mb-0 me-5">
+                  <option>Shop by Departments</option>
+                  <option>Groceries</option>
+                  <option>Drinks</option>
+                  <option>Chocolates</option>
+                </select>
+            
+                <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+                  <li class="nav-item active">
+                    <a href="women.html" class="nav-link">Women</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a href="#men" class="nav-link">Men</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#kids" class="nav-link">Kids</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#accessories" class="nav-link">Accessories</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                    <ul class="dropdown-menu" aria-labelledby="pages">
+                      <li><a href="index.html" class="dropdown-item">About Us </a></li>
+                      <li><a href="index.html" class="dropdown-item">Shop </a></li>
+                      <li><a href="index.html" class="dropdown-item">Single Product </a></li>
+                      <li><a href="index.html" class="dropdown-item">Cart </a></li>
+                      <li><a href="index.html" class="dropdown-item">Checkout </a></li>
+                      <li><a href="index.html" class="dropdown-item">Blog </a></li>
+                      <li><a href="index.html" class="dropdown-item">Single Post </a></li>
+                      <li><a href="index.html" class="dropdown-item">Styles </a></li>
+                      <li><a href="index.html" class="dropdown-item">Contact </a></li>
+                      <li><a href="index.html" class="dropdown-item">Thank You </a></li>
+                      <li><a href="index.html" class="dropdown-item">My Account </a></li>
+                      <li><a href="index.html" class="dropdown-item">404 Error </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#brand" class="nav-link">Brand</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#sale" class="nav-link">Sale</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#blog" class="nav-link">Blog</a>
+                  </li>
+                </ul>
+              
+              </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Women's Collection Banner -->
+  <section class="py-3" style="background-image: url('images/background-pattern.jpg');background-repeat: no-repeat;background-size: cover;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="banner-blocks">
+            <div class="banner-ad large bg-info block-1">
+              <div class="row banner-content p-5">
+                <div class="content-wrapper col-md-7">
+                  <div class="categories my-3">New Collection</div>
+                  <h3 class="display-4">Women's Fashion 2025</h3>
+                  <p>Discover our latest women's collection with trendy styles and comfortable designs for every occasion.</p>
+                  <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 px-4 py-3 mt-3">Shop Now</a>
+                </div>
+                <div class="img-wrapper col-md-5">
+                  <img src="/api/placeholder/400/500" alt="Women's Fashion" class="img-fluid">
+                </div>
+              </div>
+            </div>
+            
+            <div class="banner-ad bg-success-subtle block-2" style="background-position: right bottom">
+              <div class="row banner-content p-5">
+                <div class="content-wrapper col-md-7">
+                  <div class="categories sale mb-3 pb-3">30% off</div>
+                  <h3 class="banner-title">Seasonal Collection</h3>
+                  <a href="#" class="d-flex align-items-center nav-link">Shop Collection <svg width="24" height="24"><use xlink:href="#arrow-right"></use></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="banner-ad bg-danger block-3" style="background-position: right bottom">
+              <div class="row banner-content p-5">
+                <div class="content-wrapper col-md-7">
+                  <div class="categories sale mb-3 pb-3">New Arrivals</div>
+                  <h3 class="item-title">Premium Dresses</h3>
+                  <a href="#" class="d-flex align-items-center nav-link">Shop Collection <svg width="24" height="24"><use xlink:href="#arrow-right"></use></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-products py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="section-title">Featured Products</h2>
+          <p class="section-description mb-5">Discover our curated selection of trending women's fashion</p>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Product 1 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 1">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Dresses</div>
+              <h5 class="card-title">Floral Summer Dress</h5>
+              <div class="product-price mb-3">
+                <del>$89.99</del> $69.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 2">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Tops</div>
+              <h5 class="card-title">Casual Blouse</h5>
+              <div class="product-price mb-3">
+                $39.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 3">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Jeans</div>
+              <h5 class="card-title">Slim Fit Denim</h5>
+              <div class="product-price mb-3">
+                $59.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 4 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 4">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Accessories</div>
+              <h5 class="card-title">Designer Handbag</h5>
+              <div class="product-price mb-3">
+                <del>$129.99</del> $99.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center mb-5">
+          <h2 class="section-title">Shop by Category</h2>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Category 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="/api/placeholder/400/300" class="card-img" alt="Dresses">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+              <div class="text-center">
+                <h3 class="card-title text-white">Dresses</h3>
+                <a href="#" class="btn btn-outline-light">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Category 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="/api/placeholder/400/300" class="card-img" alt="Tops">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+              <div class="text-center">
+                <h3 class="card-title text-white">Tops</h3>
+                <a href="#" class="btn btn-outline-light">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Category 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="/api/placeholder/400/300" class="card-img" alt="Bottoms">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+              <div class="text-center">
+                <h3 class="card-title text-white">Bottoms</h3>
+                <a href="#" class="btn btn-outline-light">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="new-arrivals py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="section-title">New Arrivals</h2>
+          <p class="section-description mb-5">The latest additions to our women's collection</p>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Product 1 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 1">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Outerwear</div>
+              <h5 class="card-title">Lightweight Jacket</h5>
+              <div class="product-price mb-3">
+                $79.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 2">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Skirts</div>
+              <h5 class="card-title">Pleated Midi Skirt</h5>
+              <div class="product-price mb-3">
+                $49.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 3">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Sweaters</div>
+              <h5 class="card-title">Knit Cardigan</h5>
+              <div class="product-price mb-3">
+                $54.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product 4 -->
+        <div class="col-md-3">
+          <div class="card product-card border-0">
+            <img src="/api/placeholder/300/400" class="card-img-top" alt="Product 4">
+            <div class="card-body text-center">
+              <div class="product-category mb-1">Accessories</div>
+              <h5 class="card-title">Leather Belt</h5>
+              <div class="product-price mb-3">
+                $29.99
+              </div>
+              <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h3>Subscribe to Our Newsletter</h3>
+          <p class="mb-4">Get the latest updates on new products and upcoming sales</p>
+          <form class="d-flex justify-content-center">
+            <div class="input-group mb-3 w-75">
+              <input type="email" class="form-control" placeholder="Your Email Address" aria-label="Email">
+              <button class="btn btn-dark" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>A modern fashion retailer offering the latest trends for women.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Categories</h3>
+            <ul>
+                <li><a href="#">Dresses</a></li>
+                <li><a href="#">Tops</a></li>
+                <li><a href="#">Bottoms</a></li>
+                <li><a href="#">Accessories</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Customer Service</h3>
+            <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Shipping & Returns</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Your Fashion Store. All Rights Reserved.</p>
+    </div>
+</footer>
